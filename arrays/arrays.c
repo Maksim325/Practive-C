@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+
 
 typedef struct ImplementationArray {
     int size;
@@ -9,16 +11,32 @@ typedef struct ImplementationArray {
 } Array;
 
 //temparary
+int capacity(Array *arrptr)
+{
+    return arrptr->capacity;
+}
 Array *new(int size);
 int size(Array *arrptr);
-int is_empty(int arr[]);
+//int capacity(Array *arrptr);
+bool is_empty(Array *arrptr);
 int at(int *arrptr, int index);
 void check_addr(void *ptr);
 
 int main()
 {
     
-    Array *arrptr = new(4);
+    Array *arrptr = new(6);
+    int c = capacity(arrptr);
+    arrptr->data[0] = 6;
+    arrptr->data[1] = 5;
+    arrptr->data[2] = 4;
+    arrptr->data[3] = 8;
+    //arrptr->data[4] = 2;
+
+
+    printf("%d\n", size(arrptr));
+    printf("%d\n", arrptr->size);
+    free(arrptr->data);
     return 0;
 }
 
@@ -39,33 +57,19 @@ int size(Array *arrptr) // Returned array size. Can be better not O(n). In pytho
 
     while (*arrptr->data != '\0') 
     {
-        arrptr++;
         size++;
+        arrptr->data++;
+        
     }
     arrptr->size = size;
     return size;
-}
-int is_empty(int arr[]) // returned 1 if array is empty
-{
-    if (size(arr) == 0){
-        return 1;
-    }
-    return 0;
-}
-int at(Array *arrptr, int index) // must return an element by index, resizes if the index is out of range
-{
-    if (index > *arrptr->data || ) // must resizes if the index is out of range
-    {
-        
-        
-    }
-        return *newArray;
 
-       
-    int *arr = *arrptr->data + index; //return the element by index using arifmetic of arrays 
-   
-    return *arr;
 }
+bool is_empty(Array *arrptr) // returned 1 if array is empty
+{
+    return arrptr->size == 0;
+}
+
 void check_addr(void *ptr)
 {
     if (ptr = NULL){
