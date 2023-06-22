@@ -9,36 +9,10 @@ typedef struct ImplementationArray {
     int capacity;
     int *data;
 } Array;
-
 //temparary
-int capacity(Array *arrptr)
-{
-    return arrptr->capacity;
-}
-Array *new(int size);
-int size(Array *arrptr);
-//int capacity(Array *arrptr);
-bool is_empty(Array *arrptr);
-int at(int *arrptr, int index);
+
 void check_addr(void *ptr);
 
-int main()
-{
-    
-    Array *arrptr = new(6);
-    int c = capacity(arrptr);
-    arrptr->data[0] = 6;
-    arrptr->data[1] = 5;
-    arrptr->data[2] = 4;
-    arrptr->data[3] = 8;
-    //arrptr->data[4] = 2;
-
-
-    printf("%d\n", size(arrptr));
-    printf("%d\n", arrptr->size);
-    free(arrptr->data);
-    return 0;
-}
 
 //vector realization
 Array *new(int capacity) {
@@ -63,7 +37,11 @@ int size(Array *arrptr) // Returned array size. Can be better not O(n). In pytho
     }
     arrptr->size = size;
     return size;
-
+    //Here we done
+}
+int capacity(Array *arrptr)
+{
+    return arrptr->capacity;
 }
 bool is_empty(Array *arrptr) // returned 1 if array is empty
 {
@@ -76,4 +54,30 @@ void check_addr(void *ptr)
         printf("Unable to allocate memory");
         exit(EXIT_FAILURE);
     }
+}
+
+int at(Array *arrptr, int index) // return element by index. If index out of range changing the capacity
+{
+    if (index > arrptr->capacity){
+        arrptr->capacity = index;
+        return 0;
+    }
+    return *(arrptr->data + index);
+    
+}
+
+int main()
+{
+    
+    Array *arrptr = new(6);
+    int c = capacity(arrptr);
+    arrptr->data[0] = 6;
+    arrptr->data[1] = 5;
+    arrptr->data[2] = 4;
+    arrptr->data[3] = 8;
+
+
+    printf("element: %d\n", at(arrptr, 8));
+    printf("capacity: %d\n", arrptr->capacity);
+    return 0;
 }
