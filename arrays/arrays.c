@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
+const int MinCapacity = 16;
 
 typedef struct ImplementationArray {
     int size;
@@ -65,19 +66,48 @@ int at(Array *arrptr, int index) // return element by index. If index out of ran
     return *(arrptr->data + index);
     
 }
+void resize(Array *arrptr, cadidate_size)
+{
+    int size = arrptr->size;
+    int capacity = arrptr->capacity;
+    if (size < cadidate_size)
+    {
+        if (size == capacity)
+        {
+            //upsize
+            upsize(arrptr);
+        }
+    }
+    else if (size > cadidate_size)
+    {
+        if (size < capacity/sizeof(int)){
+            //downsize
+        }
+    }
+}
+void upsize(Array *arrptr){
+    *new_data = (int *)realloc(arrptr->data, sizeof(int) * capacity);
+    arrptr->data = new_data;
+}
+
+void add(Array *arrptr, int element) //nead resize for size
+{
+  
+        
+    *(arrptr->data + arrptr->size) = element;
+}
 
 int main()
 {
     
     Array *arrptr = new(6);
     int c = capacity(arrptr);
-    arrptr->data[0] = 6;
-    arrptr->data[1] = 5;
-    arrptr->data[2] = 4;
-    arrptr->data[3] = 8;
+    add(arrptr, 5);
+    int s = size(arrptr);
+    add(arrptr, 6);
 
 
-    printf("element: %d\n", at(arrptr, 8));
-    printf("capacity: %d\n", arrptr->capacity);
+    printf("element: %d\n", arrptr->data[1]);
+    printf("size: %d\n", s);
     return 0;
 }
