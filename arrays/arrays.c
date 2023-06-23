@@ -82,14 +82,34 @@ void resize(Array *arrptr, cadidate_size)
     {
         if (size < capacity/sizeof(int)){
             //downsize
+            downsize(arrptr);
         }
     }
 }
-void upsize(Array *arrptr){
+void upsize(Array *arrptr)
+{
     *new_data = (int *)realloc(arrptr->data, sizeof(int) * capacity);
+    check_addr(new_data);
     arrptr->data = new_data;
+    
 }
+void downsize(Array *arrptr)
+{
+    int old_capacity = arrptr->capacity;
+    int new_capacity = arrptr->capacity / 2 // 2 becouse it's crowth factor
 
+    if (new_capacity < MinCapacity)
+    {
+        new_capacity = MinCapacity;
+    }
+    if (new_capacity != old_capacity)
+    {
+        *new_data = (int *)realloc(arrptr->data, sizeof(int) * capacity);
+        check_addr(new_data);
+        arrptr->data = new_data;
+        arrptr->capacity = new_capacity;
+    }
+}
 void add(Array *arrptr, int element) //nead resize for size
 {
   
@@ -100,7 +120,7 @@ void add(Array *arrptr, int element) //nead resize for size
 int main()
 {
     
-    Array *arrptr = new(6);
+    Array *arrptr = new(16);
     int c = capacity(arrptr);
     add(arrptr, 5);
     int s = size(arrptr);
