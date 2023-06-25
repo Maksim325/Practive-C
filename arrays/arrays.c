@@ -28,24 +28,15 @@ Array *new(int capacity) {
     return arr;
 }
 
-int size(Array *arrptr) // Dont work
+int size(Array *arrptr)
 {
-    int size = 0;
-
-    while (*arrptr->data != '\0') 
-    {
-        size++;
-        arrptr->data++;
-        
-    }
-    arrptr->size = size;
-    return size;
+    return arrptr->size;
 }
 int capacity(Array *arrptr)
 {
     return arrptr->capacity;
 }
-bool is_empty(Array *arrptr) // returned true if array is empty
+bool is_empty(Array *arrptr)
 {
     return arrptr->size == 0;
 }
@@ -71,25 +62,31 @@ int at(Array *arrptr, int index) // return element by index. If index out of ran
     return *(arrptr->data + index);
     
 }
+int push(Array *arrptr, int item)
+{
+    if (arrptr->size > 0 && arrptr->size == arrptr->capacity ){
+        arrptr->capacity += 1;
+        arrptr->data = realloc(arrptr->data, arrptr->capacity * sizeof(int));
+    }
+    *(arrptr->data + arrptr->size) = item;
+    arrptr->size++;
+}
 // tests
 int main()
 {
     
     Array *arr = new(MinCapacity);
+    
     int element = at(arr,10);
     
-    for (int i = 1; i <= MinCapacity; i++){
-        arr->data[i] = i;
+    for (int i = 0; i <= MinCapacity; i++){
+        push(arr, i);
     }
 
-    for (int i = 1; i <= MinCapacity; i++){
+    for (int i = 0; i <= MinCapacity; i++){
         printf("element %d: %d\n", i, arr->data[i]);
     }
-    arr->data[10] = 0;
-
     size(arr);
-    printf("capacity: %d\n", arr->capacity);
     printf("size(arr): %d\n", arr->size);
-    printf("size: %d\n", size(arr));
     return 0;
 }
