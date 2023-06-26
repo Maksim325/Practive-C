@@ -71,6 +71,13 @@ int push(Array *arrptr, int item)
     *(arrptr->data + arrptr->size) = item;
     arrptr->size++;
 }
+void insert(Array *arrptr, int item, int index) // insert element by index
+{
+    for (int i = arrptr->size; i > index; i--){
+        arrptr->data[i] = arrptr->data[i-1];
+    }
+    *(arrptr->data + index) = item;
+}
 // tests
 int main()
 {
@@ -82,7 +89,7 @@ int main()
     for (int i = 0; i <= MinCapacity; i++){
         push(arr, i);
     }
-
+    insert(arr, 184, 4);
     for (int i = 0; i <= MinCapacity; i++){
         printf("element %d: %d\n", i, arr->data[i]);
     }
