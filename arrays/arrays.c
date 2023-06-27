@@ -77,6 +77,12 @@ void insert(Array *arrptr, int item, int index) // insert element by index
     }
     *(arrptr->data + index) = item;
 }
+void delete(Array *arrptr)
+{
+    free(arrptr->data);
+    free(arrptr);
+
+}
 int pop(Array *arrptr){
     if (arrptr->size == 0){
         exit(EXIT_FAILURE);
@@ -98,7 +104,7 @@ int main()
         push(arr, i);
     }
     printf("%d\n",pop(arr));
-    //pop(arr);
+    delete(arr);
     for (int i = 0; i <= arr->size; i++){
         printf("element %d: %d\n", i, arr->data[i]);
     }
