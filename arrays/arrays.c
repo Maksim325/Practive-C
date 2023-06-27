@@ -12,8 +12,7 @@ typedef struct ImplementationArray {
     int *data;
 } Array;
 //temparary
-void upsize(Array *arrptr);
-void downsize(Array *arrptr);
+
 void check_addr(void *ptr);
 
 
@@ -78,6 +77,15 @@ void insert(Array *arrptr, int item, int index) // insert element by index
     }
     *(arrptr->data + index) = item;
 }
+int pop(Array *arrptr){
+    if (arrptr->size == 0){
+        exit(EXIT_FAILURE);
+    }
+
+    int temp_element = *(arrptr->data + arrptr->size-1);
+    arrptr->size--;
+    return temp_element;
+}
 // tests
 int main()
 {
@@ -86,14 +94,16 @@ int main()
     
     int element = at(arr,10);
     
-    for (int i = 0; i <= MinCapacity; i++){
+    for (int i = 0; i < MinCapacity; i++){
         push(arr, i);
     }
-    insert(arr, 184, 4);
-    for (int i = 0; i <= MinCapacity; i++){
+    printf("%d\n",pop(arr));
+    //pop(arr);
+    for (int i = 0; i <= arr->size; i++){
         printf("element %d: %d\n", i, arr->data[i]);
     }
     size(arr);
     printf("size(arr): %d\n", arr->size);
+
     return 0;
 }
