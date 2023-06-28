@@ -77,7 +77,7 @@ void insert(Array *arrptr, int item, int index) // insert element by index
     }
     *(arrptr->data + index) = item;
 }
-void delete(Array *arrptr)
+void delete_arr(Array *arrptr)
 {
     free(arrptr->data);
     free(arrptr);
@@ -92,6 +92,18 @@ int pop(Array *arrptr){
     arrptr->size--;
     return temp_element;
 }
+
+void delete(Array *arrptr, int index)
+{
+    if (arrptr->size == 0){
+        exit(EXIT_FAILURE);
+    }
+    for (int i = 0; i < arrptr->size-1; i++){
+        arrptr->data[i] = arrptr->data[i+1];
+    }
+    *(arrptr->data + index) = 0;
+    arrptr->size--;
+}
 // tests
 int main()
 {
@@ -103,9 +115,13 @@ int main()
     for (int i = 0; i < MinCapacity; i++){
         push(arr, i);
     }
-    printf("%d\n",pop(arr));
-    delete(arr);
-    for (int i = 0; i <= arr->size; i++){
+    insert(arr, 1000, 5);
+    //printf("%d\n",pop(arr));
+
+    //delete(arr, 5);
+    printf("index of element 3: %d\n", find(arr, 1001));
+    printf("check %d\n", arr->data[6]);
+    for (int i = 0; i < 16; i++){
         printf("element %d: %d\n", i, arr->data[i]);
     }
     size(arr);
