@@ -11,10 +11,6 @@ typedef struct ImplementationArray {
     int capacity;
     int *data;
 } Array;
-//temparary
-
-void check_addr(void *ptr);
-
 
 //vector realization
 Array *new(int capacity) {
@@ -104,28 +100,13 @@ void delete(Array *arrptr, int index)
     *(arrptr->data + index) = 0;
     arrptr->size--;
 }
-// tests
-int main()
+
+int find(Array *arrptr, int item)
 {
-    
-    Array *arr = new(MinCapacity);
-    
-    int element = at(arr,10);
-    
-    for (int i = 0; i < MinCapacity; i++){
-        push(arr, i);
+    for (int i = 0; i < arrptr->size; i++){
+        if (*(arrptr->data + i) == item){
+            return i;
+        }
     }
-    insert(arr, 1000, 5);
-    //printf("%d\n",pop(arr));
-
-    //delete(arr, 5);
-    printf("index of element 3: %d\n", find(arr, 1001));
-    printf("check %d\n", arr->data[6]);
-    for (int i = 0; i < 16; i++){
-        printf("element %d: %d\n", i, arr->data[i]);
-    }
-    size(arr);
-    printf("size(arr): %d\n", arr->size);
-
-    return 0;
+    return -1;
 }
