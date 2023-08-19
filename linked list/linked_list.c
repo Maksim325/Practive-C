@@ -42,6 +42,18 @@ bool is_empty(){
 	}
 	return false;
 }
+int value_at(int index){
+	struct node *temp = head;
+	int i = 0;
+	while (temp != NULL){
+		temp = temp->next;
+		i++;
+		if (index == i){
+			return temp->data;
+		}
+	}
+
+}
 int main(){
 	head = NULL;
 	push_front(16);
@@ -50,5 +62,5 @@ int main(){
 	push_front(10);
 	push_front(10);
 
-	printf("%d", size()); //5
+	printf("%d", value_at(4)); //16
 }
