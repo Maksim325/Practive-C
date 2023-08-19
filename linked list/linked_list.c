@@ -44,7 +44,11 @@ bool is_empty(){
 }
 int main(){
 	head = NULL;
+	push_front(16);
+	push_front(10);
+	push_front(8);
+	push_front(10);
+	push_front(10);
 
-
-	printf("%d", is_empty()); //5
+	printf("%d", size()); //5
 }
