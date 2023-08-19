@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
-
+#include <stdbool.h>
 
 typedef struct node
 {
@@ -22,17 +22,29 @@ int push_front(int value){ // push and actually create list
 		return 1;
 	}
 	else{
-	temp = head;
-	head = newnode;
-	newnode->next = temp;
+		temp = head;
+		head = newnode;
+		newnode->next = temp;
 	}
 }
-
+int size(){
+	int size = 0;
+	struct node *temp = head;
+	while (temp != NULL){
+		temp = temp->next;
+		++size;
+	}
+	return size;
+}
+bool is_empty(){
+	if (head == NULL){
+		return true;
+	}
+	return false;
+}
 int main(){
 	head = NULL;
-	push_front(16);
-	push_front(10);
-	push_front(8);
 
-	printf("%d", *head->next->next);
+
+	printf("%d", is_empty()); //5
 }
