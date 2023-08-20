@@ -43,24 +43,37 @@ bool is_empty(){
 	return false;
 }
 int value_at(int index){
+	if (index > size()){
+		printf("Index out of range");
+		exit(EXIT_FAILURE);
+	}
 	struct node *temp = head;
 	int i = 0;
 	while (temp != NULL){
-		temp = temp->next;
-		i++;
+		
 		if (index == i){
 			return temp->data;
 		}
+		temp = temp->next;
+		i++;
 	}
-
 }
+void pop_front(){
+	if (head == NULL){
+		printf("Dude... create a node first");
+		exit(EXIT_FAILURE);
+	}
+	struct node *temp = head;
+	head = head->next;
+	free(temp);
+}
+
 int main(){
 	head = NULL;
 	push_front(16);
 	push_front(10);
 	push_front(8);
-	push_front(10);
-	push_front(10);
-
-	printf("%d", value_at(4)); //16
+	push_front(11);
+	pop_front();
+	printf("%d, size: %d", value_at(0),size()); //16
 }
