@@ -38,7 +38,7 @@ bool is_empty(Array *arrptr)
 
 void check_addr(void *ptr)
 {
-    if (ptr = NULL){
+    if (ptr == NULL){
         printf("Unable to allocate memory");
         exit(EXIT_FAILURE);
     }
