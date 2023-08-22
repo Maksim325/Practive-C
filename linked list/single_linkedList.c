@@ -53,6 +53,17 @@ int push_front(LinkedList *list, int value){
 		newnode->next = temp;
 	}
 }
+int size(LinkedList *list){
+    int size = 0;
+    struct node *temp = list->head;
+    check_addr(temp);
+
+    while (temp != NULL){
+        size++;
+        temp = temp->next;
+    }
+    return size;
+}
 
 
 void check_addr(void *ptr){
@@ -65,6 +76,7 @@ int main(){
     LinkedList *list = Create_linked_list();
     push_front(list, 1234567);
     push_front(list, 1234569);
+    push_front(list, 1234569);
 
-    printf("%d", *list->head);
+    printf("%d", size(list)); //2
 }
