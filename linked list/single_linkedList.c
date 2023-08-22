@@ -65,6 +65,7 @@ int size(LinkedList *list){
     return size;
 }
 
+bool empty(LinkedList *list){return list->head == NULL;}
 
 void check_addr(void *ptr){
     if (ptr == NULL){
@@ -74,9 +75,10 @@ void check_addr(void *ptr){
 }
 int main(){
     LinkedList *list = Create_linked_list();
+    /*
     push_front(list, 1234567);
     push_front(list, 1234569);
     push_front(list, 1234569);
-
-    printf("%d", size(list)); //2
+    */
+    printf("%d", empty(list)); //true
 }
