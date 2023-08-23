@@ -67,6 +67,20 @@ int size(LinkedList *list){
 
 bool empty(LinkedList *list){return list->head == NULL;}
 
+int value_at(LinkedList *list, int index){
+    if (index > size(list)){
+		printf("Index out of range");
+		exit(EXIT_FAILURE);
+	}
+    struct node *temp = list->head;
+    for (int i = 0; temp != NULL; i++){
+        if (index == i){
+            return temp->data;
+        }
+        temp = temp->next;
+    }
+}
+
 void check_addr(void *ptr){
     if (ptr == NULL){
         printf("Unable to allocate memory");
@@ -75,10 +89,9 @@ void check_addr(void *ptr){
 }
 int main(){
     LinkedList *list = Create_linked_list();
-    /*
+    
     push_front(list, 1234567);
     push_front(list, 1234569);
-    push_front(list, 1234569);
-    */
-    printf("%d", empty(list)); //true
+    push_front(list, 1234568);
+    printf("%d", value_at(list, 2)); //1234567
 }
