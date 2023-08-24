@@ -91,6 +91,8 @@ int pop_front(LinkedList *list){
 	free(temp);
 }
 
+int front(LinkedList *list){return list->head->data;}
+
 void check_addr(void *ptr){
     if (ptr == NULL){
         printf("Unable to allocate memory");
@@ -104,5 +106,5 @@ int main(){
     push_front(list, 1234569);
     push_front(list, 1234568);
     pop_front(list);
-    printf("%d", value_at(list, 0)); //1234569
+    printf("%d", front(list)); //1234569
 }
