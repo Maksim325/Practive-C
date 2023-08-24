@@ -81,6 +81,16 @@ int value_at(LinkedList *list, int index){
     }
 }
 
+int pop_front(LinkedList *list){
+	if (list->head == NULL){
+		printf("Dude... create a node first");
+		exit(EXIT_FAILURE);
+	}
+	struct node *temp = list->head;
+	list->head = list->head->next;
+	free(temp);
+}
+
 void check_addr(void *ptr){
     if (ptr == NULL){
         printf("Unable to allocate memory");
@@ -93,5 +103,6 @@ int main(){
     push_front(list, 1234567);
     push_front(list, 1234569);
     push_front(list, 1234568);
-    printf("%d", value_at(list, 2)); //1234567
+    pop_front(list);
+    printf("%d", value_at(list, 0)); //1234569
 }
