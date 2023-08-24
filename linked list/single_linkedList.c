@@ -93,6 +93,16 @@ int pop_front(LinkedList *list){
 
 int front(LinkedList *list){return list->head->data;}
 
+int back(LinkedList *list){
+    struct node *temp = list->head; 
+    while(temp != NULL){
+        if (temp->next == NULL){
+            return temp->data;
+        }
+        temp = temp->next;
+    }
+}
+
 void check_addr(void *ptr){
     if (ptr == NULL){
         printf("Unable to allocate memory");
@@ -106,5 +116,5 @@ int main(){
     push_front(list, 1234569);
     push_front(list, 1234568);
     pop_front(list);
-    printf("%d", front(list)); //1234569
+    printf("%d", back(list)); //1234567
 }
