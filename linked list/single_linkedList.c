@@ -103,6 +103,19 @@ int back(LinkedList *list){
     }
 }
 
+void insert(LinkedList *list, int index, int value){
+    struct node *temp = list->head, *next, *newnode;
+    newnode = (struct node*)malloc(sizeof(struct node));
+    check_addr(newnode);
+    newnode->data = value;
+    for (int i = 0; i < index; i++){
+        temp = temp->next;
+    }
+    next = temp->next;
+    temp->next = newnode;
+    newnode->next = next;
+}
+
 void check_addr(void *ptr){
     if (ptr == NULL){
         printf("Unable to allocate memory");
@@ -115,6 +128,6 @@ int main(){
     push_front(list, 1234567);
     push_front(list, 1234569);
     push_front(list, 1234568);
-    pop_front(list);
-    printf("%d", back(list)); //1234567
+    insert(list, 2, 12);
+    printf("%d", back(list)); //12
 }
