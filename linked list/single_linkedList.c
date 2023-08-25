@@ -115,6 +115,20 @@ void insert(LinkedList *list, int index, int value){
     temp->next = newnode;
     newnode->next = next;
 }
+void erase(LinkedList *list, int index){
+    struct node *temp = list->head, *next;
+    for (int i = 0; i < index; i++){
+        
+        if (i+1 == index){
+            break;
+        }
+        temp = temp->next;
+    }
+    next = temp->next->next;
+    free(temp->next);
+    temp->next = next;
+    
+}
 
 void check_addr(void *ptr){
     if (ptr == NULL){
@@ -124,10 +138,11 @@ void check_addr(void *ptr){
 }
 int main(){
     LinkedList *list = Create_linked_list();
+    push_front(list, 4);
+    push_front(list, 8);
+    push_front(list, 2);
+    push_front(list, 1);
     
-    push_front(list, 1234567);
-    push_front(list, 1234569);
-    push_front(list, 1234568);
-    insert(list, 2, 12);
-    printf("%d", back(list)); //12
+    erase(list,3);
+    printf("%d", back(list)); //8 -  OK
 }
