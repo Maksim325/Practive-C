@@ -154,6 +154,17 @@ int revers(LinkedList *list){
     list->head = prev;
 }
 
+int value_n_from_end(LinkedList *list, int n){
+    if (list->head == NULL){
+        printf("List not long enough to find nth item from end");
+        exit(EXIT_FAILURE);
+    }
+    int list_size = size(list);
+    int index = list_size - n - 1;
+    int return_value = value_at(list, index);
+    return return_value;
+}
+
 void check_addr(void *ptr){
     if (ptr == NULL){
         printf("Unable to allocate memory");
@@ -162,11 +173,12 @@ void check_addr(void *ptr){
 }
 int main(){
     LinkedList *list = Create_linked_list();
+    
     push_front(list, 84);
     push_front(list, 54);
     push_front(list, 8);
     push_front(list, 2);
     push_front(list, 1);
-    revers(list);
-    printf("%d", value_at(list, 0)); //8 -  OK
+    
+    printf("%d", value_n_from_end(list, 1)); //54 -  OK
 }
