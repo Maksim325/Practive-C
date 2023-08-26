@@ -143,6 +143,17 @@ int remove_value(LinkedList *list, int value){
     }
 }
 
+int revers(LinkedList *list){
+    struct node *curent = list->head, *next, *prev = NULL;
+    while (curent){
+        next = curent->next;
+        curent->next = prev;
+        prev = curent;
+        curent = next;
+    }
+    list->head = prev;
+}
+
 void check_addr(void *ptr){
     if (ptr == NULL){
         printf("Unable to allocate memory");
@@ -152,11 +163,10 @@ void check_addr(void *ptr){
 int main(){
     LinkedList *list = Create_linked_list();
     push_front(list, 84);
-
     push_front(list, 54);
     push_front(list, 8);
     push_front(list, 2);
     push_front(list, 1);
-    remove_value(list, 2);
-    printf("%d", value_at(list, 1)); //8 -  OK
+    revers(list);
+    printf("%d", value_at(list, 0)); //8 -  OK
 }
