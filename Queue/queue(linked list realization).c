@@ -64,12 +64,15 @@ void check_addr(void *ptr){
         exit(EXIT_FAILURE);
     }
 }
+bool empty(QPointers *q){return q->head == NULL && q->tail == NULL;}
 int main(){
     QPointers *q = Create_queue();
+    /*
     enqueue(q, 1);
     enqueue(q, 2);
     enqueue(q, 3);
     enqueue(q, 4);
-    printf("%d", *q->head);
+    */
+    printf("%d", empty(q)); // 1 - OK
 
 }
