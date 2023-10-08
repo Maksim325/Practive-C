@@ -130,16 +130,67 @@ int is_binary_search_tree(Node* root){
 		return 0;}
 }
 
+Node* find_min2(Node* node) {
+    while (node->left != NULL) {
+        node = node->left;
+    }
+    return node;
+}
+
+Node* delete_node(Node* root, int data){
+	if (root == NULL) return root;
+	else if (data < root->data) root->left = delete_node(root->left, data);
+	else if (data > root->data) root->right = delete_node(root->right, data); 
+	else {// We found him
+		// no child
+		if (root->left == NULL && root->right == NULL){
+			free(root);
+			root = NULL;
+			
+		}
+		// one child
+		else if (root->left == NULL){
+			Node* temp = root;
+			root = root->right;
+			free(temp);
+
+		}
+		else if (root->right == NULL){
+			Node* temp = root;
+			root = root->left;
+			free(temp);
+
+		}
+		// 2 child
+		else {
+			Node* temp = find_min2(root->right);
+			root->data = temp->data;
+			root->right = delete_node(root->right, temp->data);
+		}
+			
+	}
+	return root;
+	
+}
+
+
 int main(){
     Node *root = NULL; // create an empty BST
 
     root = insert(root, 10);
     root = insert(root, 5);
     root = insert(root, 2);
+    root = insert(root, 7);
     root = insert(root, 20);
+    root = insert(root, 15);
     root = insert(root, 25);
 
+    printf("befor:\n");
     print_tree(root);
+    root = delete_node(root, 20);
+    printf("after:\n");
+    print_tree(root);
+
     printf("is tree BST: %d\n", is_binary_search_tree(root));
     //delete_tree(root);
     printf("min value in the tree: %d\n", find_min(root));
