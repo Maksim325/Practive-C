@@ -90,17 +90,32 @@ int find_min(Node* root){
 	
 } 
 
+int find_max(Node* root){
+	if (root == NULL){
+		printf("Tree is empty");
+		exit(0);
+	}
+	else if (root->right == NULL){
+		return root->data;
+	}
+	
+	 return find_max(root->right);
+	
+} 
+
 int main(){
     Node *root = NULL; // create an empty BST
 
     root = insert(root, 10);
     root = insert(root, 5);
+    root = insert(root, 2);
     root = insert(root, 20);
     root = insert(root, 25);
 
     print_tree(root);
     //delete_tree(root);
     printf("min value in the tree: %d\n", find_min(root));
+    printf("max value in the tree: %d\n", find_max(root));
     printf("is 10 in BST: %d\n", is_in_tree(root, 10));
     printf("hight of the tree: %d\n", find_hight(root));
     printf("the number of nodes in tree: %d",get_node_count(root));
