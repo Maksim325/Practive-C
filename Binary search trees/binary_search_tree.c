@@ -77,6 +77,19 @@ int find_hight(Node* root){
 	return max(left_hight, right_hight) + 1;
 }
 
+int find_min(Node* root){
+	if (root == NULL){
+		printf("Tree is empty");
+		exit(0);
+	}
+	else if (root->left == NULL){
+		return root->data;
+	}
+	
+	 return find_min(root->left);
+	
+} 
+
 int main(){
     Node *root = NULL; // create an empty BST
 
@@ -87,6 +100,7 @@ int main(){
 
     print_tree(root);
     //delete_tree(root);
+    printf("min value in the tree: %d\n", find_min(root));
     printf("is 10 in BST: %d\n", is_in_tree(root, 10));
     printf("hight of the tree: %d\n", find_hight(root));
     printf("the number of nodes in tree: %d",get_node_count(root));
