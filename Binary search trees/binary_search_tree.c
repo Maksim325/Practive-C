@@ -42,6 +42,15 @@ int get_node_count(Node* root){
     return get_node_count(root->left) + get_node_count(root->right) +1;
 }
 
+void delete_tree(Node* root){
+    if (root == NULL) return;
+    
+    delete_tree(root->left);
+    delete_tree(root->right);
+    free(root);
+    
+}
+
 int main(){
     Node *root = NULL; // create an empty BST
 
@@ -49,6 +58,10 @@ int main(){
     root = insert(root, 5);
     root = insert(root, 20);
     print_tree(root);
+    delete_tree(root);
+    
+    
     printf("the number of nodes in tree: %d",get_node_count(root));
+    
 
 }
