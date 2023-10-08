@@ -8,22 +8,22 @@ typedef struct BstNode{
 }Node;
 
 
-Node *getNewNode(int data){
+Node *getNewNode(int value){
     Node* newNode = malloc(sizeof(Node));
-    newNode->data = data;
+    newNode->data = value;
     newNode->left = NULL;
     newNode->right = NULL;
 }
-Node* insert(Node *root, int data){
+Node* insert(Node *root, int value){
     if(root == NULL){
-        root = getNewNode(data);
+        root = getNewNode(value);
         return root;
     }
-    else if(data <= root->data){
-        root->left = insert(root->left, data); 
+    else if(value <= root->data){
+        root->left = insert(root->left, value); 
     }
     else{
-        root->right = insert(root->right, data); 
+        root->right = insert(root->right, value); 
     }
     return root;
 }
@@ -44,11 +44,24 @@ int get_node_count(Node* root){
 
 void delete_tree(Node* root){
     if (root == NULL) return;
-    
+
     delete_tree(root->left);
     delete_tree(root->right);
     free(root);
     
+}
+int is_in_tree(Node* root, int value){
+    if (root == NULL) return 0;
+
+    else if (value < root->data){
+        is_in_tree(root->left, value);
+    }
+    else if (value > root->data) {
+        is_in_tree(root->right, value);
+    }
+    else {
+        return 1;
+    }
 }
 
 int main(){
@@ -58,8 +71,8 @@ int main(){
     root = insert(root, 5);
     root = insert(root, 20);
     print_tree(root);
-    delete_tree(root);
-    
+    //delete_tree(root);
+    printf("is 10 in BST: %d\n", is_in_tree(root, 10));
     
     printf("the number of nodes in tree: %d",get_node_count(root));
     
