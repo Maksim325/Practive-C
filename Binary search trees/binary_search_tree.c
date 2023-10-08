@@ -102,6 +102,33 @@ int find_max(Node* root){
 	 return find_max(root->right);
 	
 } 
+int is_subtree_gerater(Node* root, int value){
+	if (root == NULL) return 1;
+	if (root->data > value && is_subtree_gerater(root->left, value) && is_subtree_gerater(root->right, value)){
+		return 1;
+	}
+	else{
+		return 0;}
+}
+
+int is_subtree_lesser(Node* root, int value){
+	if (root == NULL) return 1;
+	if (root->data <= value && is_subtree_lesser(root->left, value) && is_subtree_lesser(root->right, value)){
+		return 1;
+	}
+	else{
+		return 0;}
+	}
+
+int is_binary_search_tree(Node* root){
+	if (root == NULL) return 1;
+	int value = root->data;
+	if (is_subtree_lesser(root->left, value) && is_subtree_gerater(root->right, value) && is_binary_search_tree(root->left) && is_binary_search_tree(root->right)){
+		return 1;
+	}
+	else{
+		return 0;}
+}
 
 int main(){
     Node *root = NULL; // create an empty BST
@@ -113,6 +140,7 @@ int main(){
     root = insert(root, 25);
 
     print_tree(root);
+    printf("is tree BST: %d\n", is_binary_search_tree(root));
     //delete_tree(root);
     printf("min value in the tree: %d\n", find_min(root));
     printf("max value in the tree: %d\n", find_max(root));
