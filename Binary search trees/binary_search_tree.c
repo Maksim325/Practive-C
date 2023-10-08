@@ -172,6 +172,43 @@ Node* delete_node(Node* root, int data){
 	return root;
 	
 }
+Node* find(Node* root, int data) {
+    if (root == NULL || root->data == data) {
+        return root;
+    }
+
+    if (data < root->data) {
+        return find(root->left, data);
+    } else {
+        return find(root->right, data);
+    }
+}
+
+Node* get_successor(Node* root, int data) {
+    // Search for the node - O(h)
+    Node* current = find(root, data);
+
+    if (current == NULL) {
+        return NULL;
+    }
+
+    if (current->right != NULL) { // Has a right subtree
+        return find_min(current->right);
+    } else { // No right subtree
+        Node* successor = NULL;
+        Node* ancestor = root;
+        
+        while (ancestor != current) {
+            if (current->data < ancestor->data) {
+                successor = ancestor;
+                ancestor = ancestor->left;
+            } else {
+                ancestor = ancestor->right;
+            }
+        }
+        return successor;
+    }
+}
 
 
 int main(){
@@ -184,7 +221,7 @@ int main(){
     root = insert(root, 20);
     root = insert(root, 15);
     root = insert(root, 25);
-
+    printf("successor for 20: %d\n", get_successor(root,20));
     printf("befor:\n");
     print_tree(root);
     root = delete_node(root, 20);
@@ -198,6 +235,6 @@ int main(){
     printf("is 10 in BST: %d\n", is_in_tree(root, 10));
     printf("hight of the tree: %d\n", find_hight(root));
     printf("the number of nodes in tree: %d",get_node_count(root));
-    
+
 
 }
